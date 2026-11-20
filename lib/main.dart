@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:matchup/app.dart';
 import 'package:matchup/core/firebase/firebase_emulators.dart';
 import 'package:matchup/firebase_options.dart';
@@ -13,5 +14,5 @@ Future<void> main() async {
   if (kDebugMode) {
     await connectToFirebaseEmulators();
   }
-  runApp(const MatchUpApp());
+  runApp(const ProviderScope(child: MatchUpApp()));
 }
