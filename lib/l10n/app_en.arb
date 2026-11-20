@@ -1,0 +1,15 @@
+{
+  "appTitle": "MatchUp",
+  "login": "Login",
+  "signUp": "Sign up",
+  "email": "Email",
+  "password": "Password",
+  "noAccountYet": "Don't have an account? Sign up",
+  "haveAccount": "Already have an account? Log in",
+  "invalidEmail": "Enter a valid email",
+  "passwordTooShort": "Password must be at least 6 characters",
+  "wrongCredentials": "Wrong email or password",
+  "emailInUse": "This email is already registered",
+  "genericError": "Something went wrong. Try again.",
+  "logout": "Log out"
+}
