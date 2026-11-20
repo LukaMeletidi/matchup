@@ -47,4 +47,16 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get logout => 'გასვლა';
+
+  @override
+  String get profileSetupTitle => 'შექმენი პროფილი';
+
+  @override
+  String get nickname => 'მეტსახელი';
+
+  @override
+  String get nicknameInvalid => 'მეტსახელი უნდა იყოს 3-დან 20 სიმბოლომდე';
+
+  @override
+  String get save => 'შენახვა';
 }

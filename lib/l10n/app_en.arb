@@ -11,5 +11,9 @@
   "wrongCredentials": "Wrong email or password",
   "emailInUse": "This email is already registered",
   "genericError": "Something went wrong. Try again.",
-  "logout": "Log out"
+  "logout": "Log out",
+  "profileSetupTitle": "Create your profile",
+  "nickname": "Nickname",
+  "nicknameInvalid": "Nickname must be 3 to 20 characters",
+  "save": "Save"
 }
