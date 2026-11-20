@@ -47,4 +47,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logout => 'Log out';
+
+  @override
+  String get profileSetupTitle => 'Create your profile';
+
+  @override
+  String get nickname => 'Nickname';
+
+  @override
+  String get nicknameInvalid => 'Nickname must be 3 to 20 characters';
+
+  @override
+  String get save => 'Save';
 }

@@ -4,10 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/auth/presentation/login_screen.dart';
 import 'package:matchup/features/home/home_screen.dart';
+import 'package:matchup/features/profile/presentation/current_profile_provider.dart';
+import 'package:matchup/features/profile/presentation/profile_setup_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier<int>(0);
   ref.listen(authStateProvider, (_, _) => refresh.value++);
+  ref.listen(currentProfileProvider, (_, _) => refresh.value++);
   ref.onDispose(refresh.dispose);
 
   return GoRouter(
@@ -17,16 +20,29 @@ final routerProvider = Provider<GoRouter>((ref) {
       final auth = ref.read(authStateProvider);
       if (auth.isLoading) return null;
 
-      final signedIn = auth.value != null;
-      final atLogin = state.matchedLocation == '/login';
+      final location = state.matchedLocation;
 
-      if (!signedIn && !atLogin) return '/login';
-      if (signedIn && atLogin) return '/';
+      if (auth.value == null) {
+        return location == '/login' ? null : '/login';
+      }
+
+      final profile = ref.read(currentProfileProvider);
+      if (profile.isLoading) return null;
+
+      if (profile.value == null) {
+        return location == '/profile-setup' ? null : '/profile-setup';
+      }
+
+      if (location == '/login' || location == '/profile-setup') return '/';
       return null;
     },
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
       GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+      GoRoute(
+        path: '/profile-setup',
+        builder: (context, state) => const ProfileSetupScreen(),
+      ),
     ],
   );
 });
