@@ -59,4 +59,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get createMatchTitle => 'New match';
+
+  @override
+  String get venue => 'Venue';
+
+  @override
+  String get venueInvalid => 'Venue name must be 2 to 60 characters';
+
+  @override
+  String get pickDateTime => 'Pick date and time';
+
+  @override
+  String get invalidDateTime => 'Pick a date and time in the future';
+
+  @override
+  String get createMatch => 'Create match';
+
+  @override
+  String get noMatches => 'No upcoming matches yet';
 }

@@ -59,4 +59,25 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get save => 'შენახვა';
+
+  @override
+  String get createMatchTitle => 'ახალი მატჩი';
+
+  @override
+  String get venue => 'მოედანი';
+
+  @override
+  String get venueInvalid => 'მოედნის სახელი უნდა იყოს 2-დან 60 სიმბოლომდე';
+
+  @override
+  String get pickDateTime => 'აირჩიე თარიღი და დრო';
+
+  @override
+  String get invalidDateTime => 'აირჩიე მომავალი თარიღი და დრო';
+
+  @override
+  String get createMatch => 'მატჩის შექმნა';
+
+  @override
+  String get noMatches => 'მომავალი მატჩები ჯერ არ არის';
 }

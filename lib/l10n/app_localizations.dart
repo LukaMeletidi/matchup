@@ -199,6 +199,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// No description provided for @createMatchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New match'**
+  String get createMatchTitle;
+
+  /// No description provided for @venue.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue'**
+  String get venue;
+
+  /// No description provided for @venueInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Venue name must be 2 to 60 characters'**
+  String get venueInvalid;
+
+  /// No description provided for @pickDateTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick date and time'**
+  String get pickDateTime;
+
+  /// No description provided for @invalidDateTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date and time in the future'**
+  String get invalidDateTime;
+
+  /// No description provided for @createMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Create match'**
+  String get createMatch;
+
+  /// No description provided for @noMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming matches yet'**
+  String get noMatches;
 }
 
 class _AppLocalizationsDelegate
