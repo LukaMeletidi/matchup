@@ -15,5 +15,12 @@
   "profileSetupTitle": "Create your profile",
   "nickname": "Nickname",
   "nicknameInvalid": "Nickname must be 3 to 20 characters",
-  "save": "Save"
+  "save": "Save",
+  "createMatchTitle": "New match",
+  "venue": "Venue",
+  "venueInvalid": "Venue name must be 2 to 60 characters",
+  "pickDateTime": "Pick date and time",
+  "invalidDateTime": "Pick a date and time in the future",
+  "createMatch": "Create match",
+  "noMatches": "No upcoming matches yet"
 }

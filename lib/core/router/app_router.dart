@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/auth/presentation/login_screen.dart';
 import 'package:matchup/features/home/home_screen.dart';
+import 'package:matchup/features/matches/presentation/create_match_screen.dart';
 import 'package:matchup/features/profile/presentation/current_profile_provider.dart';
 import 'package:matchup/features/profile/presentation/profile_setup_screen.dart';
 
@@ -42,6 +43,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/profile-setup',
         builder: (context, state) => const ProfileSetupScreen(),
+      ),
+      GoRoute(
+        path: '/matches/new',
+        builder: (context, state) => const CreateMatchScreen(),
       ),
     ],
   );
