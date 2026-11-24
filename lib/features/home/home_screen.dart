@@ -49,6 +49,7 @@ class HomeScreen extends ConsumerWidget {
                     trailing: Text(
                       '${match.playerIds.length}/${match.maxPlayers}',
                     ),
+                    onTap: () => context.push('/matches/${match.id}'),
                   );
                 },
               ),

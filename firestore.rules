@@ -36,7 +36,28 @@ service cloud.firestore {
         && request.resource.data.playerIds == [request.auth.uid]
         && request.resource.data.createdAt == request.time;
 
-      allow update, delete: if false;
+      allow update: if request.auth != null
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['playerIds'])
+        && (
+          // join: add yourself, and do not exceed maxPlayers
+          (
+            !(request.auth.uid in resource.data.playerIds)
+            && request.resource.data.playerIds ==
+              resource.data.playerIds.concat([request.auth.uid])
+            && request.resource.data.playerIds.size()
+              <= resource.data.maxPlayers
+          )
+          // leave: remove yourself, unless you are the organizer
+          || (
+            request.auth.uid in resource.data.playerIds
+            && request.auth.uid != resource.data.organizerId
+            && request.resource.data.playerIds ==
+              resource.data.playerIds.removeAll([request.auth.uid])
+          )
+        );
+
+      allow delete: if false;
     }
   }
 }

@@ -80,4 +80,24 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get noMatches => 'მომავალი მატჩები ჯერ არ არის';
+
+  @override
+  String playersCount(int current, int max) {
+    return 'მოთამაშეები: $current/$max';
+  }
+
+  @override
+  String get matchNotFound => 'ეს მატჩი აღარ არსებობს';
+
+  @override
+  String get unknownPlayer => 'მოთამაშე';
+
+  @override
+  String get join => 'შეერთება';
+
+  @override
+  String get leave => 'გასვლა';
+
+  @override
+  String get matchFull => 'მატჩი უკვე სავსეა';
 }

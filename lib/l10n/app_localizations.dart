@@ -241,6 +241,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No upcoming matches yet'**
   String get noMatches;
+
+  /// No description provided for @playersCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Players: {current}/{max}'**
+  String playersCount(int current, int max);
+
+  /// No description provided for @matchNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'This match no longer exists'**
+  String get matchNotFound;
+
+  /// No description provided for @unknownPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Player'**
+  String get unknownPlayer;
+
+  /// No description provided for @join.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get join;
+
+  /// No description provided for @leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leave;
+
+  /// No description provided for @matchFull.
+  ///
+  /// In en, this message translates to:
+  /// **'This match is already full'**
+  String get matchFull;
 }
 
 class _AppLocalizationsDelegate

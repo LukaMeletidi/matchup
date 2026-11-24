@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:matchup/core/firebase/firebase_providers.dart';
+import 'package:matchup/features/matches/domain/match_exceptions.dart';
 import 'package:matchup/features/matches/domain/sport.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
 
@@ -20,6 +21,13 @@ class MatchRepository {
         .map((snapshot) => snapshot.docs.map(_fromDoc).toList());
   }
 
+  Stream<SportMatch?> watchMatch(String matchId) {
+    return _matches
+        .doc(matchId)
+        .snapshots()
+        .map((doc) => doc.exists ? _fromDoc(doc) : null);
+  }
+
   Future<void> createMatch({
     required Sport sport,
     required String organizerId,
@@ -34,6 +42,28 @@ class MatchRepository {
       'maxPlayers': sport.maxPlayers,
       'playerIds': [organizerId],
       'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  Future<void> joinMatch({required String matchId, required String uid}) {
+    final ref = _matches.doc(matchId);
+    return _firestore.runTransaction((transaction) async {
+      final snapshot = await transaction.get(ref);
+      if (!snapshot.exists) throw const MatchNotFoundException();
+
+      final match = _fromDoc(snapshot);
+      if (match.hasPlayer(uid)) return;
+      if (match.isFull) throw const MatchFullException();
+
+      transaction.update(ref, {
+        'playerIds': FieldValue.arrayUnion([uid]),
+      });
+    });
+  }
+
+  Future<void> leaveMatch({required String matchId, required String uid}) {
+    return _matches.doc(matchId).update({
+      'playerIds': FieldValue.arrayRemove([uid]),
     });
   }
 
