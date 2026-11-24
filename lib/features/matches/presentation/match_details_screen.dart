@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
+import 'package:matchup/features/matches/presentation/court_view.dart';
 import 'package:matchup/features/matches/presentation/match_actions_controller.dart';
 import 'package:matchup/features/matches/presentation/match_error_message.dart';
 import 'package:matchup/features/matches/presentation/matches_providers.dart';
-import 'package:matchup/features/profile/presentation/user_profile_provider.dart';
 import 'package:matchup/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -38,12 +38,12 @@ class MatchDetailsScreen extends ConsumerWidget {
                 style: textTheme.titleMedium,
               ),
               const SizedBox(height: 16),
+              CourtView(playerIds: item.playerIds),
+              const SizedBox(height: 16),
               Text(
                 l10n.playersCount(item.playerIds.length, item.maxPlayers),
                 style: textTheme.titleMedium,
               ),
-              const SizedBox(height: 16),
-              for (final playerId in item.playerIds) _PlayerTile(uid: playerId),
               const SizedBox(height: 24),
               if (uid != null && item.organizerId != uid)
                 _JoinLeaveButton(match: item, uid: uid),
@@ -51,23 +51,6 @@ class MatchDetailsScreen extends ConsumerWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class _PlayerTile extends ConsumerWidget {
-  const _PlayerTile({required this.uid});
-
-  final String uid;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    final profile = ref.watch(userProfileProvider(uid));
-
-    return ListTile(
-      leading: const CircleAvatar(child: Icon(Icons.person)),
-      title: Text(profile.value?.nickname ?? l10n.unknownPlayer),
     );
   }
 }
