@@ -80,4 +80,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noMatches => 'No upcoming matches yet';
+
+  @override
+  String playersCount(int current, int max) {
+    return 'Players: $current/$max';
+  }
+
+  @override
+  String get matchNotFound => 'This match no longer exists';
+
+  @override
+  String get unknownPlayer => 'Player';
+
+  @override
+  String get join => 'Join';
+
+  @override
+  String get leave => 'Leave';
+
+  @override
+  String get matchFull => 'This match is already full';
 }

@@ -22,5 +22,17 @@
   "pickDateTime": "Pick date and time",
   "invalidDateTime": "Pick a date and time in the future",
   "createMatch": "Create match",
-  "noMatches": "No upcoming matches yet"
+  "noMatches": "No upcoming matches yet",
+  "playersCount": "Players: {current}/{max}",
+  "@playersCount": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "max": { "type": "int" }
+    }
+  },
+  "matchNotFound": "This match no longer exists",
+  "unknownPlayer": "Player",
+  "join": "Join",
+  "leave": "Leave",
+  "matchFull": "This match is already full"
 }

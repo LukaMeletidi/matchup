@@ -22,5 +22,11 @@
   "pickDateTime": "აირჩიე თარიღი და დრო",
   "invalidDateTime": "აირჩიე მომავალი თარიღი და დრო",
   "createMatch": "მატჩის შექმნა",
-  "noMatches": "მომავალი მატჩები ჯერ არ არის"
+  "noMatches": "მომავალი მატჩები ჯერ არ არის",
+  "playersCount": "მოთამაშეები: {current}/{max}",
+  "matchNotFound": "ეს მატჩი აღარ არსებობს",
+  "unknownPlayer": "მოთამაშე",
+  "join": "შეერთება",
+  "leave": "გასვლა",
+  "matchFull": "მატჩი უკვე სავსეა"
 }

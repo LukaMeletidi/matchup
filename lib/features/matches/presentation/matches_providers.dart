@@ -8,3 +8,12 @@ final upcomingMatchesProvider = StreamProvider<List<SportMatch>>((ref) {
   if (user == null) return Stream.value([]);
   return ref.watch(matchRepositoryProvider).watchUpcomingMatches();
 });
+
+final matchProvider = StreamProvider.family<SportMatch?, String>((
+  ref,
+  matchId,
+) {
+  final user = ref.watch(authStateProvider).value;
+  if (user == null) return Stream.value(null);
+  return ref.watch(matchRepositoryProvider).watchMatch(matchId);
+});
