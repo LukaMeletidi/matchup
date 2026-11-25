@@ -100,4 +100,42 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get matchFull => 'მატჩი უკვე სავსეა';
+
+  @override
+  String get matchTitle => 'მატჩის სახელი';
+
+  @override
+  String get matchTitleInvalid => 'შეიყვანე 3-დან 40 სიმბოლომდე';
+
+  @override
+  String get matchFormat => 'ფორმატი';
+
+  @override
+  String get formatSets => 'სეტებით';
+
+  @override
+  String get formatTournament => 'ტურნირი';
+
+  @override
+  String get matchKind => 'ტიპი';
+
+  @override
+  String get kindFriendly => 'მეგობრული';
+
+  @override
+  String get kindRanked => 'სარეიტინგო';
+
+  @override
+  String get pricePerPlayer => 'თანხა მონაწილეზე (₾)';
+
+  @override
+  String get priceInvalid => 'შეიყვანე თანხა 0-დან 1000-მდე';
+
+  @override
+  String get matchDetailsTitle => 'მატჩის დეტალები';
+
+  @override
+  String priceValue(int price) {
+    return '$price ₾';
+  }
 }

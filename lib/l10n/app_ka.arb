@@ -28,5 +28,17 @@
   "unknownPlayer": "მოთამაშე",
   "join": "შეერთება",
   "leave": "გასვლა",
-  "matchFull": "მატჩი უკვე სავსეა"
+  "matchFull": "მატჩი უკვე სავსეა",
+  "matchTitle": "მატჩის სახელი",
+  "matchTitleInvalid": "შეიყვანე 3-დან 40 სიმბოლომდე",
+  "matchFormat": "ფორმატი",
+  "formatSets": "სეტებით",
+  "formatTournament": "ტურნირი",
+  "matchKind": "ტიპი",
+  "kindFriendly": "მეგობრული",
+  "kindRanked": "სარეიტინგო",
+  "pricePerPlayer": "თანხა მონაწილეზე (₾)",
+  "priceInvalid": "შეიყვანე თანხა 0-დან 1000-მდე",
+  "matchDetailsTitle": "მატჩის დეტალები",
+  "priceValue": "{price} ₾"
 }
