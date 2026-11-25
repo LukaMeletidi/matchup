@@ -22,7 +22,8 @@ service cloud.firestore {
 
       allow create: if request.auth != null
         && request.resource.data.keys().hasOnly([
-          'sportId', 'organizerId', 'venueName', 'startsAt',
+          'sportId', 'organizerId', 'venueName', 'title', 'format',
+          'kind', 'pricePerPlayer', 'startsAt',
           'maxPlayers', 'playerIds', 'createdAt'
         ])
         && request.resource.data.organizerId == request.auth.uid
@@ -34,7 +35,15 @@ service cloud.firestore {
         && request.resource.data.startsAt is timestamp
         && request.resource.data.startsAt > request.time
         && request.resource.data.playerIds == [request.auth.uid]
-        && request.resource.data.createdAt == request.time;
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.title is string
+        && request.resource.data.title.size() >= 3
+        && request.resource.data.title.size() <= 40
+        && request.resource.data.format in ['sets', 'tournament']
+        && request.resource.data.kind in ['friendly', 'ranked']
+        && request.resource.data.pricePerPlayer is int
+        && request.resource.data.pricePerPlayer >= 0
+        && request.resource.data.pricePerPlayer <= 1000;
 
       allow update: if request.auth != null
         && request.resource.data.diff(resource.data).affectedKeys()

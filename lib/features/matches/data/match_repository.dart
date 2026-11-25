@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:matchup/core/firebase/firebase_providers.dart';
+import 'package:matchup/features/matches/domain/match_enums.dart';
 import 'package:matchup/features/matches/domain/match_exceptions.dart';
 import 'package:matchup/features/matches/domain/sport.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
@@ -32,12 +33,20 @@ class MatchRepository {
     required Sport sport,
     required String organizerId,
     required String venueName,
+    required String title,
+    required MatchFormat format,
+    required MatchKind kind,
+    required int pricePerPlayer,
     required DateTime startsAt,
   }) {
     return _matches.add({
       'sportId': sport.id,
       'organizerId': organizerId,
       'venueName': venueName,
+      'title': title,
+      'format': format.name,
+      'kind': kind.name,
+      'pricePerPlayer': pricePerPlayer,
       'startsAt': Timestamp.fromDate(startsAt),
       'maxPlayers': sport.maxPlayers,
       'playerIds': [organizerId],
@@ -74,6 +83,10 @@ class MatchRepository {
       sportId: data['sportId'] as String,
       organizerId: data['organizerId'] as String,
       venueName: data['venueName'] as String,
+      title: data['title'] as String,
+      format: MatchFormat.values.byName(data['format'] as String),
+      kind: MatchKind.values.byName(data['kind'] as String),
+      pricePerPlayer: data['pricePerPlayer'] as int,
       startsAt: (data['startsAt'] as Timestamp).toDate(),
       maxPlayers: data['maxPlayers'] as int,
       playerIds: List<String>.from(data['playerIds'] as List),

@@ -277,6 +277,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This match is already full'**
   String get matchFull;
+
+  /// No description provided for @matchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Match name'**
+  String get matchTitle;
+
+  /// No description provided for @matchTitleInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 3 to 40 characters'**
+  String get matchTitleInvalid;
+
+  /// No description provided for @matchFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Format'**
+  String get matchFormat;
+
+  /// No description provided for @formatSets.
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get formatSets;
+
+  /// No description provided for @formatTournament.
+  ///
+  /// In en, this message translates to:
+  /// **'Tournament'**
+  String get formatTournament;
+
+  /// No description provided for @matchKind.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get matchKind;
+
+  /// No description provided for @kindFriendly.
+  ///
+  /// In en, this message translates to:
+  /// **'Friendly'**
+  String get kindFriendly;
+
+  /// No description provided for @kindRanked.
+  ///
+  /// In en, this message translates to:
+  /// **'Ranked'**
+  String get kindRanked;
+
+  /// No description provided for @pricePerPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Price per player (GEL)'**
+  String get pricePerPlayer;
+
+  /// No description provided for @priceInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a price from 0 to 1000'**
+  String get priceInvalid;
+
+  /// No description provided for @matchDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Match details'**
+  String get matchDetailsTitle;
+
+  /// No description provided for @priceValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} GEL'**
+  String priceValue(int price);
 }
 
 class _AppLocalizationsDelegate

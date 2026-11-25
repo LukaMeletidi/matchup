@@ -9,6 +9,7 @@ import {
     arrayRemove,
     arrayUnion,
     doc,
+    serverTimestamp,
     setDoc,
     Timestamp,
     updateDoc,
@@ -43,12 +44,31 @@ function dbFor(uid) {
     return testEnv.authenticatedContext(uid).firestore();
 }
 
+const validMatch = (uid) => ({
+    sportId: 'padel',
+    organizerId: uid,
+    venueName: 'Test Club',
+    title: 'Evening game',
+    format: 'sets',
+    kind: 'friendly',
+    pricePerPlayer: 30,
+    startsAt: Timestamp.fromDate(new Date(Date.now() + 3600 * 1000)),
+    maxPlayers: 4,
+    playerIds: [uid],
+    createdAt: serverTimestamp(),
+});
+
+
 async function seedMatch(overrides = {}) {
     await testEnv.withSecurityRulesDisabled(async (context) => {
         await setDoc(doc(context.firestore(), 'matches', 'match1'), {
             sportId: 'padel',
             organizerId: 'alice',
             venueName: 'Padel Stadium',
+            title: 'Test Match',
+            format: 'sets',
+            kind: 'friendly',
+            pricePerPlayer: 30,
             startsAt: Timestamp.fromDate(new Date(Date.now() + 24 * 60 * 60 * 1000)),
             maxPlayers: 4,
             playerIds: ['alice'],
@@ -106,3 +126,46 @@ describe('matches collection: join and leave', () => {
     });
 });
 
+describe('matches collection: create', () => {
+    it('lets a signed-in user create a valid match', async () => {
+        await assertSucceeds(
+            setDoc(doc(dbFor('u1'), 'matches', 'new1'), validMatch('u1')),
+        );
+    });
+
+    it('does not accept a title that is too short', async () => {
+        await assertFails(
+            setDoc(doc(dbFor('u1'), 'matches', 'new1'), {
+                ...validMatch('u1'),
+                title: 'ab',
+            }),
+        );
+    });
+
+    it('does not accept an unknown format', async () => {
+        await assertFails(
+            setDoc(doc(dbFor('u1'), 'matches', 'new1'), {
+                ...validMatch('u1'),
+                format: 'blitz',
+            }),
+        );
+    });
+
+    it('does not accept a negative price', async () => {
+        await assertFails(
+            setDoc(doc(dbFor('u1'), 'matches', 'new1'), {
+                ...validMatch('u1'),
+                pricePerPlayer: -5,
+            }),
+        );
+    });
+
+    it('accepts a ranked match', async () => {
+        await assertSucceeds(
+            setDoc(doc(dbFor('u1'), 'matches', 'new1'), {
+                ...validMatch('u1'),
+                kind: 'ranked',
+            }),
+        );
+    });
+});

@@ -34,5 +34,22 @@
   "unknownPlayer": "Player",
   "join": "Join",
   "leave": "Leave",
-  "matchFull": "This match is already full"
+  "matchFull": "This match is already full",
+  "matchTitle": "Match name",
+  "matchTitleInvalid": "Enter 3 to 40 characters",
+  "matchFormat": "Format",
+  "formatSets": "Sets",
+  "formatTournament": "Tournament",
+  "matchKind": "Type",
+  "kindFriendly": "Friendly",
+  "kindRanked": "Ranked",
+  "pricePerPlayer": "Price per player (GEL)",
+  "priceInvalid": "Enter a price from 0 to 1000",
+  "matchDetailsTitle": "Match details",
+  "priceValue": "{price} GEL",
+  "@priceValue": {
+    "placeholders": {
+      "price": { "type": "int" }
+    }
+  }
 }

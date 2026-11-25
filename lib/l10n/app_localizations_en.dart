@@ -100,4 +100,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get matchFull => 'This match is already full';
+
+  @override
+  String get matchTitle => 'Match name';
+
+  @override
+  String get matchTitleInvalid => 'Enter 3 to 40 characters';
+
+  @override
+  String get matchFormat => 'Format';
+
+  @override
+  String get formatSets => 'Sets';
+
+  @override
+  String get formatTournament => 'Tournament';
+
+  @override
+  String get matchKind => 'Type';
+
+  @override
+  String get kindFriendly => 'Friendly';
+
+  @override
+  String get kindRanked => 'Ranked';
+
+  @override
+  String get pricePerPlayer => 'Price per player (GEL)';
+
+  @override
+  String get priceInvalid => 'Enter a price from 0 to 1000';
+
+  @override
+  String get matchDetailsTitle => 'Match details';
+
+  @override
+  String priceValue(int price) {
+    return '$price GEL';
+  }
 }
