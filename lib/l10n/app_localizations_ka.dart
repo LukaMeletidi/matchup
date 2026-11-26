@@ -141,4 +141,10 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get allDays => 'ყველა';
+
+  @override
+  String get tabPublic => 'საჯარო';
+
+  @override
+  String get tabMine => 'ჩემი';
 }

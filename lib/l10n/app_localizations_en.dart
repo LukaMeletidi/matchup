@@ -141,4 +141,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allDays => 'All';
+
+  @override
+  String get tabPublic => 'Public';
+
+  @override
+  String get tabMine => 'My';
 }

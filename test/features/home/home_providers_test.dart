@@ -3,7 +3,11 @@ import 'package:matchup/features/home/home_providers.dart';
 import 'package:matchup/features/matches/domain/match_enums.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
 
-SportMatch matchAt(String id, DateTime startsAt) {
+SportMatch matchAt(
+  String id,
+  DateTime startsAt, {
+  List<String> playerIds = const ['org'],
+}) {
   return SportMatch(
     id: id,
     sportId: 'padel',
@@ -15,7 +19,7 @@ SportMatch matchAt(String id, DateTime startsAt) {
     pricePerPlayer: 30,
     startsAt: startsAt,
     maxPlayers: 4,
-    playerIds: const ['org'],
+    playerIds: playerIds,
   );
 }
 
@@ -46,6 +50,24 @@ void main() {
         isTrue,
       );
       expect(isSameDay(DateTime(2030, 5, 10), DateTime(2030, 6, 10)), isFalse);
+    });
+  });
+
+  group('filterByTab', () {
+    final day = DateTime(2026, 12, 1, 18);
+    final mine = matchAt('a', day, playerIds: ['u1', 'u2']);
+    final others = matchAt('b', day, playerIds: ['u3']);
+
+    test('public returns all matches', () {
+      expect(filterByTab([mine, others], HomeTab.public, 'u1'), [mine, others]);
+    });
+
+    test('mine returns only my matches', () {
+      expect(filterByTab([mine, others], HomeTab.mine, 'u1'), [mine]);
+    });
+
+    test('mine returns nothing when the user is signed out', () {
+      expect(filterByTab([mine, others], HomeTab.mine, null), isEmpty);
     });
   });
 }

@@ -34,6 +34,23 @@ class HomeScreen extends ConsumerWidget {
       body: Column(
         children: [
           const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: SegmentedButton<HomeTab>(
+              showSelectedIcon: false,
+              segments: [
+                ButtonSegment(
+                  value: HomeTab.public,
+                  label: Text(l10n.tabPublic),
+                ),
+                ButtonSegment(value: HomeTab.mine, label: Text(l10n.tabMine)),
+              ],
+              selected: {ref.watch(homeTabProvider)},
+              onSelectionChanged: (s) =>
+                  ref.read(homeTabProvider.notifier).select(s.first),
+            ),
+          ),
+          const SizedBox(height: 8),
           const WeekStrip(),
           const SizedBox(height: 8),
           Expanded(

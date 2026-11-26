@@ -355,6 +355,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get allDays;
+
+  /// No description provided for @tabPublic.
+  ///
+  /// In en, this message translates to:
+  /// **'Public'**
+  String get tabPublic;
+
+  /// No description provided for @tabMine.
+  ///
+  /// In en, this message translates to:
+  /// **'My'**
+  String get tabMine;
 }
 
 class _AppLocalizationsDelegate

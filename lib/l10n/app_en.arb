@@ -52,5 +52,7 @@
       "price": { "type": "int" }
     }
   },
-  "allDays": "All"
+  "allDays": "All",
+  "tabPublic": "Public",
+  "tabMine": "My"
 }
