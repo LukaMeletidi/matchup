@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matchup/features/auth/data/auth_repository.dart';
-import 'package:matchup/features/matches/presentation/matches_providers.dart';
+import 'package:matchup/features/home/home_providers.dart';
+import 'package:matchup/features/home/week_strip.dart';
 import 'package:matchup/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -11,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final matches = ref.watch(upcomingMatchesProvider);
+    final matches = ref.watch(visibleMatchesProvider);
     final materialL10n = MaterialLocalizations.of(context);
 
     return Scaffold(
@@ -30,29 +31,38 @@ class HomeScreen extends ConsumerWidget {
         tooltip: l10n.createMatch,
         child: const Icon(Icons.add),
       ),
-      body: matches.when(
-        error: (error, stack) => Center(child: Text(l10n.genericError)),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        data: (items) => items.isEmpty
-            ? Center(child: Text(l10n.noMatches))
-            : ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final match = items[index];
-                  final time = TimeOfDay.fromDateTime(match.startsAt);
-                  return ListTile(
-                    title: Text(match.venueName),
-                    subtitle: Text(
-                      '${materialL10n.formatMediumDate(match.startsAt)}, '
-                      '${materialL10n.formatTimeOfDay(time)}',
+      body: Column(
+        children: [
+          const SizedBox(height: 8),
+          const WeekStrip(),
+          const SizedBox(height: 8),
+          Expanded(
+            child: matches.when(
+              error: (error, stack) => Center(child: Text(l10n.genericError)),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              data: (items) => items.isEmpty
+                  ? Center(child: Text(l10n.noMatches))
+                  : ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final match = items[index];
+                        final time = TimeOfDay.fromDateTime(match.startsAt);
+                        return ListTile(
+                          title: Text(match.venueName),
+                          subtitle: Text(
+                            '${materialL10n.formatMediumDate(match.startsAt)}, '
+                            '${materialL10n.formatTimeOfDay(time)}',
+                          ),
+                          trailing: Text(
+                            '${match.playerIds.length}/${match.maxPlayers}',
+                          ),
+                          onTap: () => context.push('/matches/${match.id}'),
+                        );
+                      },
                     ),
-                    trailing: Text(
-                      '${match.playerIds.length}/${match.maxPlayers}',
-                    ),
-                    onTap: () => context.push('/matches/${match.id}'),
-                  );
-                },
-              ),
+            ),
+          ),
+        ],
       ),
     );
   }

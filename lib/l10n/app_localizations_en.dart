@@ -138,4 +138,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String priceValue(int price) {
     return '$price GEL';
   }
+
+  @override
+  String get allDays => 'All';
 }
