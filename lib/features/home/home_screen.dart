@@ -36,18 +36,23 @@ class HomeScreen extends ConsumerWidget {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: SegmentedButton<HomeTab>(
-              showSelectedIcon: false,
-              segments: [
-                ButtonSegment(
-                  value: HomeTab.public,
-                  label: Text(l10n.tabPublic),
-                ),
-                ButtonSegment(value: HomeTab.mine, label: Text(l10n.tabMine)),
+            child: Row(
+              children: [
+                for (final tab in HomeTab.values)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: ChoiceChip(
+                      showCheckmark: false,
+                      label: Text(switch (tab) {
+                        HomeTab.public => l10n.tabPublic,
+                        HomeTab.mine => l10n.tabMine,
+                      }),
+                      selected: ref.watch(homeTabProvider) == tab,
+                      onSelected: (_) =>
+                          ref.read(homeTabProvider.notifier).select(tab),
+                    ),
+                  ),
               ],
-              selected: {ref.watch(homeTabProvider)},
-              onSelectionChanged: (s) =>
-                  ref.read(homeTabProvider.notifier).select(s.first),
             ),
           ),
           const SizedBox(height: 8),
