@@ -44,5 +44,7 @@
   "allDays": "ყველა",
   "tabPublic": "საჯარო",
   "tabMine": "ჩემი",
-  "organizerLabel": "ორგანიზატორი"
+  "organizerLabel": "ორგანიზატორი",
+  "tabHistory": "ისტორია",
+  "noHistory": "გასული მატჩები ჯერ არ გაქვს"
 }

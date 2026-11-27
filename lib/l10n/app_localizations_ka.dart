@@ -150,4 +150,10 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get organizerLabel => 'ორგანიზატორი';
+
+  @override
+  String get tabHistory => 'ისტორია';
+
+  @override
+  String get noHistory => 'გასული მატჩები ჯერ არ გაქვს';
 }

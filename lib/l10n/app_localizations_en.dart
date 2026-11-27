@@ -150,4 +150,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get organizerLabel => 'Organizer';
+
+  @override
+  String get tabHistory => 'History';
+
+  @override
+  String get noHistory => 'No past matches yet';
 }

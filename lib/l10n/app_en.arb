@@ -55,5 +55,7 @@
   "allDays": "All",
   "tabPublic": "Public",
   "tabMine": "My",
-  "organizerLabel": "Organizer"
+  "organizerLabel": "Organizer",
+  "tabHistory": "History",
+  "noHistory": "No past matches yet"
 }

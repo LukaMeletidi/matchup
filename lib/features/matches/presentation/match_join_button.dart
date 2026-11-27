@@ -26,7 +26,9 @@ class MatchJoinButton extends ConsumerWidget {
       }
     });
 
-    if (uid == null || match.organizerId == uid) {
+    if (uid == null ||
+        match.organizerId == uid ||
+        match.startsAt.isBefore(DateTime.now())) {
       return const SizedBox.shrink();
     }
 
