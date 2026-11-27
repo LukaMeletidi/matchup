@@ -43,5 +43,6 @@
   "priceValue": "{price} ₾",
   "allDays": "ყველა",
   "tabPublic": "საჯარო",
-  "tabMine": "ჩემი"
+  "tabMine": "ჩემი",
+  "organizerLabel": "ორგანიზატორი"
 }

@@ -367,6 +367,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My'**
   String get tabMine;
+
+  /// No description provided for @organizerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Organizer'**
+  String get organizerLabel;
 }
 
 class _AppLocalizationsDelegate

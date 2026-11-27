@@ -147,4 +147,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tabMine => 'My';
+
+  @override
+  String get organizerLabel => 'Organizer';
 }

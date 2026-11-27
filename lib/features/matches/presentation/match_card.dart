@@ -1,5 +1,8 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
+import 'package:matchup/features/matches/presentation/player_slots.dart';
+import 'package:matchup/features/profile/presentation/user_profile_provider.dart';
 import 'package:matchup/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -74,14 +77,25 @@ class MatchCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  PlayerSlots(
+                    playerIds: match.playerIds,
+                    maxPlayers: match.maxPlayers,
+                  ),
+                  const Spacer(),
                   Text(
                     '${match.playerIds.length}/${match.maxPlayers}',
                     style: textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                ],
+              ),
+              const Divider(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _OrganizerLabel(uid: match.organizerId),
                   Text(l10n.priceValue(match.pricePerPlayer)),
                 ],
               ),
@@ -89,6 +103,32 @@ class MatchCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _OrganizerLabel extends ConsumerWidget {
+  const _OrganizerLabel({required this.uid});
+
+  final String uid;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
+    final nickname = ref.watch(userProfileProvider(uid)).value?.nickname;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.organizerLabel,
+          style: Theme.of(context).textTheme.labelSmall,
+        ),
+        Text(
+          nickname ?? '',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

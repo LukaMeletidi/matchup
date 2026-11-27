@@ -54,5 +54,6 @@
   },
   "allDays": "All",
   "tabPublic": "Public",
-  "tabMine": "My"
+  "tabMine": "My",
+  "organizerLabel": "Organizer"
 }

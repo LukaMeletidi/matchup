@@ -147,4 +147,7 @@ class AppLocalizationsKa extends AppLocalizations {
 
   @override
   String get tabMine => 'ჩემი';
+
+  @override
+  String get organizerLabel => 'ორგანიზატორი';
 }
