@@ -69,5 +69,11 @@ void main() {
     test('mine returns nothing when the user is signed out', () {
       expect(filterByTab([mine, others], HomeTab.mine, null), isEmpty);
     });
+
+    test('history returns the list unchanged', () {
+      final result = filterByTab([mine, others], HomeTab.history, 'u1');
+
+      expect(result, [mine, others]);
+    });
   });
 }

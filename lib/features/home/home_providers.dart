@@ -3,7 +3,7 @@ import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
 import 'package:matchup/features/matches/presentation/matches_providers.dart';
 
-enum HomeTab { public, mine }
+enum HomeTab { public, mine, history }
 
 class HomeTabNotifier extends Notifier<HomeTab> {
   @override
@@ -25,6 +25,7 @@ List<SportMatch> filterByTab(
     HomeTab.public => matches,
     HomeTab.mine =>
       uid == null ? [] : matches.where((m) => m.hasPlayer(uid)).toList(),
+    HomeTab.history => matches,
   };
 }
 
@@ -49,9 +50,11 @@ List<SportMatch> filterByDay(List<SportMatch> matches, DateTime? day) {
 }
 
 final visibleMatchesProvider = Provider<AsyncValue<List<SportMatch>>>((ref) {
+  final tab = ref.watch(homeTabProvider);
+  if (tab == HomeTab.history) return ref.watch(myPastMatchesProvider);
+
   final matches = ref.watch(upcomingMatchesProvider);
   final day = ref.watch(selectedDayProvider);
-  final tab = ref.watch(homeTabProvider);
   final uid = ref.watch(authStateProvider).value?.uid;
 
   return matches.whenData(

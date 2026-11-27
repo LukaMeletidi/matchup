@@ -1,5 +1,3 @@
-
-
 class MatchFullException implements Exception {
   const MatchFullException();
 }

@@ -14,6 +14,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final matches = ref.watch(visibleMatchesProvider);
+    final currentTab = ref.watch(homeTabProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -46,8 +47,9 @@ class HomeScreen extends ConsumerWidget {
                       label: Text(switch (tab) {
                         HomeTab.public => l10n.tabPublic,
                         HomeTab.mine => l10n.tabMine,
+                        HomeTab.history => l10n.tabHistory,
                       }),
-                      selected: ref.watch(homeTabProvider) == tab,
+                      selected: currentTab == tab,
                       onSelected: (_) =>
                           ref.read(homeTabProvider.notifier).select(tab),
                     ),
@@ -56,14 +58,22 @@ class HomeScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const WeekStrip(),
-          const SizedBox(height: 8),
+          if (currentTab != HomeTab.history) ...[
+            const WeekStrip(),
+            const SizedBox(height: 8),
+          ],
           Expanded(
             child: matches.when(
               error: (error, stack) => Center(child: Text(l10n.genericError)),
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (items) => items.isEmpty
-                  ? Center(child: Text(l10n.noMatches))
+                  ? Center(
+                      child: Text(
+                        currentTab == HomeTab.history
+                            ? l10n.noHistory
+                            : l10n.noMatches,
+                      ),
+                    )
                   : ListView.builder(
                       padding: const EdgeInsets.only(bottom: 88),
                       itemCount: items.length,

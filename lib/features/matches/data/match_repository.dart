@@ -22,6 +22,15 @@ class MatchRepository {
         .map((snapshot) => snapshot.docs.map(_fromDoc).toList());
   }
 
+  Stream<List<SportMatch>> watchMyPastMatches(String uid) {
+    return _matches
+        .where('playerIds', arrayContains: uid)
+        .where('startsAt', isLessThan: Timestamp.now())
+        .orderBy('startsAt', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map(_fromDoc).toList());
+  }
+
   Stream<SportMatch?> watchMatch(String matchId) {
     return _matches
         .doc(matchId)

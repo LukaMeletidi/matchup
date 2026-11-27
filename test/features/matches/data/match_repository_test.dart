@@ -114,4 +114,48 @@ void main() {
       expect(match.playerIds, ['org']);
     });
   });
+
+  group('watchMyPastMatches', () {
+    Future<void> addMatch(DateTime startsAt, List<String> playerIds) {
+      return firestore.collection('matches').add({
+        'sportId': 'padel',
+        'organizerId': playerIds.first,
+        'venueName': 'Club',
+        'title': 'Test Match',
+        'format': 'sets',
+        'kind': 'friendly',
+        'pricePerPlayer': 30,
+        'startsAt': Timestamp.fromDate(startsAt),
+        'maxPlayers': 4,
+        'playerIds': playerIds,
+      });
+    }
+
+    final past = DateTime.now().subtract(const Duration(days: 2));
+    final future = DateTime.now().add(const Duration(days: 2));
+
+    test('returns only past matches where the user plays', () async {
+      await addMatch(past, ['u1']);
+      await addMatch(future, ['u1']);
+      await addMatch(past, ['u2']);
+
+      final matches = await repository.watchMyPastMatches('u1').first;
+
+      expect(matches, hasLength(1));
+      expect(matches.single.playerIds, ['u1']);
+      expect(matches.single.startsAt.isBefore(DateTime.now()), isTrue);
+    });
+
+    test('orders matches from newest to oldest', () async {
+      final older = DateTime.now().subtract(const Duration(days: 5));
+      final newer = DateTime.now().subtract(const Duration(days: 1));
+      await addMatch(older, ['u1']);
+      await addMatch(newer, ['u1']);
+
+      final matches = await repository.watchMyPastMatches('u1').first;
+
+      expect(matches, hasLength(2));
+      expect(matches.first.startsAt.isAfter(matches.last.startsAt), isTrue);
+    });
+  });
 }
