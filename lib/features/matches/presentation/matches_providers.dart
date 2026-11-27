@@ -17,3 +17,9 @@ final matchProvider = StreamProvider.family<SportMatch?, String>((
   if (user == null) return Stream.value(null);
   return ref.watch(matchRepositoryProvider).watchMatch(matchId);
 });
+
+final myPastMatchesProvider = StreamProvider<List<SportMatch>>((ref) {
+  final user = ref.watch(authStateProvider).value;
+  if (user == null) return Stream.value([]);
+  return ref.watch(matchRepositoryProvider).watchMyPastMatches(user.uid);
+});
