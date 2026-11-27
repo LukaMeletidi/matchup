@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:matchup/features/auth/data/auth_repository.dart';
 import 'package:matchup/features/home/home_providers.dart';
 import 'package:matchup/features/home/week_strip.dart';
+import 'package:matchup/features/matches/presentation/match_card.dart';
 import 'package:matchup/l10n/app_localizations.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -13,7 +14,6 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final matches = ref.watch(visibleMatchesProvider);
-    final materialL10n = MaterialLocalizations.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,22 +65,10 @@ class HomeScreen extends ConsumerWidget {
               data: (items) => items.isEmpty
                   ? Center(child: Text(l10n.noMatches))
                   : ListView.builder(
+                      padding: const EdgeInsets.only(bottom: 88),
                       itemCount: items.length,
-                      itemBuilder: (context, index) {
-                        final match = items[index];
-                        final time = TimeOfDay.fromDateTime(match.startsAt);
-                        return ListTile(
-                          title: Text(match.venueName),
-                          subtitle: Text(
-                            '${materialL10n.formatMediumDate(match.startsAt)}, '
-                            '${materialL10n.formatTimeOfDay(time)}',
-                          ),
-                          trailing: Text(
-                            '${match.playerIds.length}/${match.maxPlayers}',
-                          ),
-                          onTap: () => context.push('/matches/${match.id}'),
-                        );
-                      },
+                      itemBuilder: (context, index) =>
+                          MatchCard(match: items[index]),
                     ),
             ),
           ),
