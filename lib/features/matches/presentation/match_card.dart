@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
+import 'package:matchup/features/matches/presentation/match_join_button.dart';
 import 'package:matchup/features/matches/presentation/player_slots.dart';
 import 'package:matchup/features/profile/presentation/user_profile_provider.dart';
 import 'package:matchup/l10n/app_localizations.dart';
@@ -99,6 +100,8 @@ class MatchCard extends StatelessWidget {
                   Text(l10n.priceValue(match.pricePerPlayer)),
                 ],
               ),
+              const SizedBox(height: 12),
+              MatchJoinButton(match: match),
             ],
           ),
         ),

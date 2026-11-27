@@ -1,9 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/matches/domain/sport_match.dart';
 import 'package:matchup/features/matches/presentation/court_view.dart';
-import 'package:matchup/features/matches/presentation/match_actions_controller.dart';
-import 'package:matchup/features/matches/presentation/match_error_message.dart';
+import 'package:matchup/features/matches/presentation/match_join_button.dart';
 import 'package:matchup/features/matches/presentation/match_labels.dart';
 import 'package:matchup/features/matches/presentation/matches_providers.dart';
 import 'package:matchup/l10n/app_localizations.dart';
@@ -19,7 +17,6 @@ class MatchDetailsScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
     final match = ref.watch(matchProvider(matchId));
-    final uid = ref.watch(authStateProvider).value?.uid;
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.matchDetailsTitle)),
@@ -43,8 +40,7 @@ class MatchDetailsScreen extends ConsumerWidget {
                       style: textTheme.titleMedium,
                     ),
                     const SizedBox(height: 24),
-                    if (uid != null && item.organizerId != uid)
-                      _JoinLeaveButton(match: item, uid: uid),
+                    MatchJoinButton(match: item),
                   ],
                 ),
               ),
@@ -52,45 +48,6 @@ class MatchDetailsScreen extends ConsumerWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class _JoinLeaveButton extends ConsumerWidget {
-  const _JoinLeaveButton({required this.match, required this.uid});
-
-  final SportMatch match;
-  final String uid;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-    final isLoading = ref.watch(matchActionsControllerProvider).isLoading;
-    final controller = ref.read(matchActionsControllerProvider.notifier);
-    final isPlayer = match.hasPlayer(uid);
-    final canPress = !isLoading && (isPlayer || !match.isFull);
-
-    ref.listen(matchActionsControllerProvider, (previous, next) {
-      if (next.hasError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(matchErrorMessage(next.error!, l10n))),
-        );
-      }
-    });
-
-    return FilledButton(
-      onPressed: canPress
-          ? () => isPlayer
-                ? controller.leave(match.id)
-                : controller.join(match.id)
-          : null,
-      child: isLoading
-          ? const SizedBox(
-              width: 20,
-              height: 20,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : Text(isPlayer ? l10n.leave : l10n.join),
     );
   }
 }
