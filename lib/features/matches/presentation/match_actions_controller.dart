@@ -5,10 +5,14 @@ import 'package:matchup/features/auth/presentation/auth_state_provider.dart';
 import 'package:matchup/features/matches/data/match_repository.dart';
 
 class MatchActionsController extends AsyncNotifier<void> {
+  MatchActionsController(this.matchId);
+
+  final String matchId;
+
   @override
   FutureOr<void> build() {}
 
-  Future<void> join(String matchId) async {
+  Future<void> join() async {
     final uid = ref.read(authStateProvider).value?.uid;
     if (uid == null) return;
 
@@ -20,7 +24,7 @@ class MatchActionsController extends AsyncNotifier<void> {
     );
   }
 
-  Future<void> leave(String matchId) async {
+  Future<void> leave() async {
     final uid = ref.read(authStateProvider).value?.uid;
     if (uid == null) return;
 
@@ -34,6 +38,6 @@ class MatchActionsController extends AsyncNotifier<void> {
 }
 
 final matchActionsControllerProvider =
-    AsyncNotifierProvider<MatchActionsController, void>(
+    AsyncNotifierProvider.family<MatchActionsController, void, String>(
       MatchActionsController.new,
     );

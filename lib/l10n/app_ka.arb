@@ -40,5 +40,9 @@
   "pricePerPlayer": "თანხა მონაწილეზე (₾)",
   "priceInvalid": "შეიყვანე თანხა 0-დან 1000-მდე",
   "matchDetailsTitle": "მატჩის დეტალები",
-  "priceValue": "{price} ₾"
+  "priceValue": "{price} ₾",
+  "allDays": "ყველა",
+  "tabPublic": "საჯარო",
+  "tabMine": "ჩემი",
+  "organizerLabel": "ორგანიზატორი"
 }

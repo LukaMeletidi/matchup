@@ -138,4 +138,16 @@ class AppLocalizationsKa extends AppLocalizations {
   String priceValue(int price) {
     return '$price ₾';
   }
+
+  @override
+  String get allDays => 'ყველა';
+
+  @override
+  String get tabPublic => 'საჯარო';
+
+  @override
+  String get tabMine => 'ჩემი';
+
+  @override
+  String get organizerLabel => 'ორგანიზატორი';
 }

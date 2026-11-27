@@ -349,6 +349,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{price} GEL'**
   String priceValue(int price);
+
+  /// No description provided for @allDays.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get allDays;
+
+  /// No description provided for @tabPublic.
+  ///
+  /// In en, this message translates to:
+  /// **'Public'**
+  String get tabPublic;
+
+  /// No description provided for @tabMine.
+  ///
+  /// In en, this message translates to:
+  /// **'My'**
+  String get tabMine;
+
+  /// No description provided for @organizerLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Organizer'**
+  String get organizerLabel;
 }
 
 class _AppLocalizationsDelegate
